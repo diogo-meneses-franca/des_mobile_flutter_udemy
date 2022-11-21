@@ -1,4 +1,4 @@
-# i_am_rich
+# meu_primeiro_app
 
 A new Flutter project.
 

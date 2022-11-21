@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="diogo.com.i_am_rich">
+    package="br.edu.paranavai.ifpr.meu_primeiro_app">
    <application
-        android:label="i_am_rich"
+        android:label="meu_primeiro_app"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
