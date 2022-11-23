@@ -18,7 +18,9 @@ class _SoundBarState extends State<SoundBar> {
       home: SafeArea(
           child: Scaffold(
         backgroundColor: Colors.blue,
-        appBar: AppBar(),
+        appBar: AppBar(
+          backgroundColor: Colors.blue[900],
+        ),
       )),
     );
   }
