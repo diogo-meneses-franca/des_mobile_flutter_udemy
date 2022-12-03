@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 void main() {
   runApp(SoundBar());
@@ -16,12 +17,17 @@ class _SoundBarState extends State<SoundBar> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: SafeArea(
-          child: Scaffold(
-        backgroundColor: Colors.blue,
-        appBar: AppBar(
-          backgroundColor: Colors.blue[900],
+        child: Scaffold(
+          body: Center(
+            child: TextButton(
+                onPressed: () async {
+                  final player = AudioPlayer();
+                  await player.setSource(AssetSource('note2.wav'));
+                },
+                child: Text("Play")),
+          ),
         ),
-      )),
+      ),
     );
   }
 }
