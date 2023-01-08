@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'custom_box.dart';
+import 'box_content.dart';
 
-const int activeCardColor = 0xFF1D1E33;
-const int bottomContainerColor = 0xFFEB1555;
+const activeCardColor = Color(0xFF1D1E33);
+const inactiveCardColor = Color(0xFF111328);
+const bottomContainerColor = Color(0xFFEB1555);
 const double bottomContainerHeight = 80.0;
+
+enum Gender {
+  male,
+  female,
+}
 
 class InputPage extends StatefulWidget {
   const InputPage({Key? key}) : super(key: key);
@@ -12,6 +21,8 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
+  Gender selectedGender;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,12 +38,33 @@ class _InputPageState extends State<InputPage> {
             children: [
               Expanded(
                 child: CustomBox(
-                  colour: activeCardColor,
+                  onPress: () {
+                    setState(() {
+                      selectedGender = Gender.male;
+                    });
+                  },
+                  colour: selectedGender == Gender.male
+                      ? activeCardColor
+                      : inactiveCardColor,
+                  customBoxChild: boxContent(
+                    childBoxIcon: FontAwesomeIcons.mars,
+                    childBoxText: "Male",
+                  ),
                 ),
               ),
               Expanded(
                 child: CustomBox(
-                  colour: activeCardColor,
+                  onPress: () {
+                    setState(() {
+                      selectedGender = Gender.female;
+                    });
+                  },
+                  colour: selectedGender == Gender.female
+                      ? activeCardColor
+                      : inactiveCardColor,
+                  customBoxChild: boxContent(
+                      childBoxIcon: FontAwesomeIcons.venus,
+                      childBoxText: "FEMALE"),
                 ),
               )
             ],
@@ -71,20 +103,6 @@ class _InputPageState extends State<InputPage> {
           )
         ],
       ),
-    );
-  }
-}
-
-class CustomBox extends StatelessWidget {
-  final int colour;
-  CustomBox({required this.colour});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.all(15.0),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10.0), color: Color(colour)),
     );
   }
 }
