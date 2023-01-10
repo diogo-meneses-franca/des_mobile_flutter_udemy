@@ -8,7 +8,7 @@ class CustomBox extends StatelessWidget {
   final Widget customBoxChild;
   final dynamic onPress;
   const CustomBox(
-      {required this.colour, required this.customBoxChild, this.onPress});
+      {super.key, required this.colour, required this.customBoxChild, this.onPress});
 
   @override
   Widget build(BuildContext context) {
