@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
 
-const double margin = 15.0;
-const double borderRadius = 10.0;
 
 class CustomBox extends StatelessWidget {
   final Color colour;
   final Widget customBoxChild;
   final dynamic onPress;
   const CustomBox(
-      {super.key, required this.colour, required this.customBoxChild, this.onPress});
+      {required this.colour,required this.customBoxChild, this.onPress});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onPress,
       child: Container(
-        margin: const EdgeInsets.all(margin),
+        child: customBoxChild,
+        margin: const EdgeInsets.all(15.0),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(borderRadius), color: colour),
+            borderRadius: BorderRadius.circular(10.0), color: colour),
       ),
     );
   }

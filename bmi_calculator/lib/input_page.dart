@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'custom_box.dart';
 import 'box_content.dart';
-
-const activeCardColor = Color(0xFF1D1E33);
-const inactiveCardColor = Color(0xFF111328);
-const bottomContainerColor = Color(0xFFEB1555);
-const double bottomContainerHeight = 80.0;
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'constants.dart';
+import 'round_icon_button.dart';
 
 enum Gender {
   male,
@@ -21,7 +18,10 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  late Gender selectedGender;
+  Gender? selectedGender;
+  int height = 180;
+  int weight = 60;
+  int age = 20;
 
   @override
   Widget build(BuildContext context) {
@@ -29,78 +29,202 @@ class _InputPageState extends State<InputPage> {
       backgroundColor: Colors.black26,
       appBar: AppBar(
         backgroundColor: Colors.black26,
-        title: Center(child: Text("BMI CALCULATOR")),
+        title: const Center(child: Text("BMI CALCULATOR")),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Expanded(
-              child: Row(
-            children: [
-              Expanded(
-                child: CustomBox(
-                  onPress: () {
-                    setState(() {
-                      selectedGender = Gender.male;
-                    });
-                  },
-                  colour: selectedGender == Gender.male
-                      ? activeCardColor
-                      : inactiveCardColor,
-                  customBoxChild: boxContent(
-                    childBoxIcon: FontAwesomeIcons.mars,
-                    childBoxText: "Male",
-                  ),
-                ),
-              ),
-              Expanded(
-                child: CustomBox(
-                  onPress: () {
-                    setState(() {
-                      selectedGender = Gender.female;
-                    });
-                  },
-                  colour: selectedGender == Gender.female
-                      ? activeCardColor
-                      : inactiveCardColor,
-                  customBoxChild: boxContent(
-                      childBoxIcon: FontAwesomeIcons.venus,
-                      childBoxText: "FEMALE"),
-                ),
-              )
-            ],
-          )),
-          Expanded(
-              child: Row(
-            children: [
-              Expanded(
-                child: CustomBox(
-                  colour: activeCardColor,
-                ),
-              )
-            ],
-          )),
           Expanded(
             child: Row(
               children: [
                 Expanded(
                   child: CustomBox(
-                    colour: activeCardColor,
+                    onPress: () {
+                      setState(() {
+                        selectedGender = Gender.male;
+                      });
+                    },
+                    colour: selectedGender == Gender.male
+                        ? kActiveCardColor
+                        : kInactiveCardColor,
+                    customBoxChild: const BoxContent(
+                      childBoxIcon: FontAwesomeIcons.mars,
+                      childBoxText: "MALE",
+                    ),
                   ),
                 ),
                 Expanded(
                   child: CustomBox(
-                    colour: activeCardColor,
+                    onPress: () {
+                      setState(() {
+                        selectedGender = Gender.female;
+                      });
+                    },
+                    colour: selectedGender == Gender.female
+                        ? kActiveCardColor
+                        : kInactiveCardColor,
+                    customBoxChild: const BoxContent(
+                        childBoxIcon: FontAwesomeIcons.venus,
+                        childBoxText: "FEMALE"),
                   ),
                 ),
               ],
             ),
           ),
+          Expanded(
+            child: Row(
+              children: [
+                Expanded(
+                  child: CustomBox(
+                    onPress: () {},
+                    colour: kInactiveCardColor,
+                    customBoxChild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          "HEIGHT",
+                          style: kLabelTextStyle,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.baseline,
+                          textBaseline: TextBaseline.alphabetic,
+                          children: [
+                            Text(
+                              height.toString(),
+                              style: kNumberTextStyle,
+                            ),
+                            const Text(
+                              'cm',
+                              style: kLabelTextStyle,
+                            ),
+                          ],
+                        ),
+                        SliderTheme(
+                          data: SliderTheme.of(context).copyWith(
+                              inactiveTrackColor: const Color(0XFF8D8E98),
+                              activeTrackColor: Colors.white,
+                              thumbColor: const Color(0xFFEB1555),
+                              overlayColor: const Color(0x1fEB1555),
+                              thumbShape: const RoundSliderThumbShape(
+                                  enabledThumbRadius: 15.0),
+                              overlayShape: const RoundSliderOverlayShape(
+                                  overlayRadius: 30.0)),
+                          child: Slider(
+                            value: height.toDouble(),
+                            min: 120.0,
+                            max: 220.0,
+                            onChanged: (double newValue) {
+                              setState(() {
+                                height = newValue.toInt();
+                              });
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: Row(
+              children: [
+                Expanded(
+                  child: CustomBox(
+                    onPress: () {},
+                    colour: kInactiveCardColor,
+                    customBoxChild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          "WEIGHT",
+                          style: kLabelTextStyle,
+                        ),
+                        Text(
+                          weight.toString(),
+                          style: kNumberTextStyle,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            RoundIconButton(
+                              buttonIcon: FontAwesomeIcons.minus,
+                              onPress: () {
+                                setState(() {
+                                  weight--;
+                                });
+                              },
+                            ),
+                            const SizedBox(
+                              width: sizedBoxWidth,
+                            ),
+                            RoundIconButton(
+                              buttonIcon: FontAwesomeIcons.plus,
+                              onPress: () {
+                                setState(() {
+                                  weight++;
+                                });
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: CustomBox(
+                    colour: kInactiveCardColor,
+                    customBoxChild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          "AGE",
+                          style: kLabelTextStyle,
+                        ),
+                        Text(
+                          age.toString(),
+                          style: kNumberTextStyle,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            RoundIconButton(
+                              buttonIcon: FontAwesomeIcons.minus,
+                              onPress: () {
+                                setState(() {
+                                  age--;
+                                });
+                              },
+                            ),
+                            const SizedBox(
+                              width: sizedBoxWidth,
+                            ),
+                            RoundIconButton(
+                              buttonIcon: FontAwesomeIcons.plus,
+                              onPress: () {
+                                setState(() {
+                                  age++;
+                                });
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
           Container(
-            color: Color(bottomContainerColor),
-            height: bottomContainerHeight,
-            margin: EdgeInsets.only(top: 10.0),
+            color: kBottomContainerColor,
+            height: kBottomContainerHeight,
+            margin: const EdgeInsets.only(top: 10.0),
             width: double.infinity,
-          )
+          ),
         ],
       ),
     );
