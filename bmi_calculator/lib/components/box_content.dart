@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'constants.dart';
-
+import '../constants.dart';
 
 class BoxContent extends StatelessWidget {
-  const BoxContent({super.key, required  this.childBoxIcon,required this.childBoxText});
+  const BoxContent(
+      {super.key, required this.childBoxIcon, required this.childBoxText});
 
   final IconData childBoxIcon;
   final String childBoxText;

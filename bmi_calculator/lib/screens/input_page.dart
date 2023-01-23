@@ -1,11 +1,11 @@
-import 'package:bmi_calculator/results_page.dart';
 import 'package:flutter/material.dart';
-import 'custom_box.dart';
-import 'box_content.dart';
+import '../components/custom_box.dart';
+import '../components/box_content.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'constants.dart';
-import 'round_icon_button.dart';
+import '../constants.dart';
+import '../components/round_icon_button.dart';
 import 'results_page.dart';
+import '../components/bottom_button.dart';
 
 enum Gender {
   male,
@@ -28,9 +28,9 @@ class _InputPageState extends State<InputPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black26,
+      backgroundColor: kScaffoldColor,
       appBar: AppBar(
-        backgroundColor: Colors.black26,
+        backgroundColor: kAppBarColor,
         title: const Center(child: Text("BMI CALCULATOR")),
       ),
       body: Column(
@@ -221,8 +221,9 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          GestureDetector(
-            onTap: () {
+          BottomButton(
+            bottomText: 'CALCULATE',
+            action: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -230,18 +231,6 @@ class _InputPageState extends State<InputPage> {
                 ),
               );
             },
-            child: Container(
-              color: kBottomContainerColor,
-              height: kBottomContainerHeight,
-              margin: const EdgeInsets.only(top: 10.0),
-              width: double.infinity,
-              child: const Center(
-                child: Text(
-                  'CALCULATE',
-                  style: kNumberTextStyle,
-                ),
-              ),
-            ),
           ),
         ],
       ),
