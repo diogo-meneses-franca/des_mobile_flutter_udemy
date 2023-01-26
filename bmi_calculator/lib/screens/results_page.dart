@@ -4,7 +4,15 @@ import 'package:bmi_calculator/components/custom_box.dart';
 import 'package:bmi_calculator/components/bottom_button.dart';
 
 class ResultPage extends StatelessWidget {
-  const ResultPage({Key? key}) : super(key: key);
+  final String interpretation;
+  final String bmi;
+  final String result;
+
+  const ResultPage(
+      {super.key,
+      required this.interpretation,
+      required this.bmi,
+      required this.result});
 
   @override
   Widget build(BuildContext context) {
@@ -35,17 +43,17 @@ class ResultPage extends StatelessWidget {
               customBoxChild: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: const [
+                children: [
                   Text(
-                    'Normal',
+                    result.toUpperCase(),
                     style: kResultTextStyle,
                   ),
                   Text(
-                    '20.0',
+                    bmi,
                     style: kBMITextStyle,
                   ),
                   Text(
-                    'Interpretation',
+                    interpretation,
                     style: kInterpretationTextStyle,
                     textAlign: TextAlign.center,
                   )
