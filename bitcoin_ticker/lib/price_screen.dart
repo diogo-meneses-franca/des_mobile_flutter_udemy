@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:bitcoin_ticker/coin_data.dart';
+import 'dart:io' show Platform;
 
 class PriceScreen extends StatefulWidget {
   @override
@@ -9,12 +10,48 @@ class PriceScreen extends StatefulWidget {
 
 class _PriceScreenState extends State<PriceScreen> {
   String selectedCurrency = 'USD';
-  List<Text> getTextItems() {
-    List<Text> items = [];
-    for (String curr in currenciesList) {
-      items.add(Text(curr));
+
+  DropdownButton<String> androidDropdownButton() {
+    List<DropdownMenuItem<String>> dropdownItems = [];
+    for (String items in currenciesList) {
+      var item = DropdownMenuItem(
+        value: items,
+        child: Text(items),
+      );
+      dropdownItems.add(item);
     }
-    return items;
+    return DropdownButton<String>(
+      value: selectedCurrency,
+      items: dropdownItems,
+      onChanged: (value) {
+        setState(() {
+          selectedCurrency = value!;
+        });
+      },
+    );
+  }
+
+  CupertinoPicker iosPicker() {
+    List<Text> pickerItems = [];
+    for (String curr in currenciesList) {
+      pickerItems.add(Text(curr));
+    }
+
+    return CupertinoPicker(
+      backgroundColor: Colors.lightBlue,
+      itemExtent: 32.0,
+      onSelectedItemChanged: (int value) {},
+      children: pickerItems,
+    );
+  }
+
+  Widget? getPicker() {
+    if (Platform.isIOS) {
+      return iosPicker();
+    } else if (Platform.isAndroid) {
+      return androidDropdownButton();
+    }
+    return null;
   }
 
   @override
@@ -53,25 +90,10 @@ class _PriceScreenState extends State<PriceScreen> {
             alignment: Alignment.center,
             padding: const EdgeInsets.only(bottom: 30.0),
             color: Colors.lightBlue,
-            child: Center(
-                child: CupertinoPicker(
-              backgroundColor: Colors.lightBlue,
-              itemExtent: 32.0,
-              onSelectedItemChanged: (int value) {},
-              children: getTextItems(),
-            )),
-          ),
+            child: Center(child: getPicker()),
+          )
         ],
       ),
     );
   }
 }
-
-// DropdownButton(
-// items: getDropdownItems(),
-// onChanged: (value) {
-// setState(() {
-// selectedCurrency = value;
-// });
-// },
-// ),
