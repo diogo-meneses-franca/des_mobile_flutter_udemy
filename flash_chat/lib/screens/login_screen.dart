@@ -2,7 +2,7 @@ import 'package:flash_chat/screens/chat_screen.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
-  static String id = 'login_screen';
+  static const String id = 'login_screen';
   const LoginScreen({super.key});
 
   @override
@@ -20,9 +20,12 @@ class _LoginScreenState extends State<LoginScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Container(
-              height: 200.0,
-              child: Image.asset('images/logo.png'),
+            Hero(
+              tag: 'logo',
+              child: Container(
+                height: 200.0,
+                child: Image.asset('images/logo.png'),
+              ),
             ),
             const SizedBox(
               height: 48.0,
