@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "670472103921",
+    "project_id": "flash-chat-4c8f8",
+    "storage_bucket": "flash-chat-4c8f8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:670472103921:android:62cfb1cbd2b4dcd3d88650",
+        "android_client_info": {
+          "package_name": "br.com.tutorlegal.flash_chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "670472103921-dsil0m74dfmbtce4h76g4svpia4aeok2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQu-wCLIUc8fMsi09g7exo-Dj3R7yYRlg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "670472103921-dsil0m74dfmbtce4h76g4svpia4aeok2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
